@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Group;
-Use App\Http\Requests\GroupRequest;
+use App\Http\Requests\GroupRequest;
 
 class GroupController extends Controller
 {
@@ -17,21 +17,43 @@ class GroupController extends Controller
 
     public function index()
     {
-        return view();
+        $groups = Group::with('mark')->get();
+
+        foreach ($groups as $group) {
+            $avg_groups[$group->id]['avg_group'] = $group->mark->avg('mark');
+            foreach ($group->mark as $mark) {
+                $avg_groups[$group->id][$mark->subject->subject_name] = $mark->
+                where('subject_id', $mark->subject_id)->avg('mark');
+            }
+        }
+
+        return view('groups.index',['groups' => $groups, 'avg_groups' => $avg_groups]);
     }
 
     public function create()
     {
-
+        return view('groups.create');
     }
 
-    public function update()
+    public function store(GroupRequest $request)
     {
-
+        Group::create($request->all());
+        return redirect('groups/');
+    }
+    public function edit(Group $group)
+    {
+        return view('groups.edit', ['group' => $group]);
     }
 
-    public function destroy()
+    public function update(GroupRequest $request, Group $group)
     {
+        $group->update($request->all());
+        return redirect('groups/');
+    }
 
+    public function destroy(Group $group)
+    {
+        $group->delete();
+        return redirect('groups/');
     }
 }

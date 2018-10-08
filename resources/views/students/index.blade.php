@@ -7,5 +7,9 @@
         @component('otherComponents.table.students', ['students' => $students])
         @endcomponent
     @endif
-
+    <div class="text-center">
+        <a class="btn btn-primary" href="{{ route('students.create') }}">
+            Добавить студента
+        </a>
+    </div>
 @endsection

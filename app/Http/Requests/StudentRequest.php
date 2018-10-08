@@ -13,7 +13,7 @@ class StudentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,8 +25,8 @@ class StudentRequest extends FormRequest
     {
         return [
             'first_name' => 'required|alpha|min:3|max:25',
-            'middle_name' => 'required|alpha|min:3|max:25',
             'last_name' => 'required|alpha|min:3|max:25',
+            'patronymic' => 'required|alpha|min:3|max:25',
             'date_of_birthday' => 'required|date',
             'group_id' => 'required',
         ];

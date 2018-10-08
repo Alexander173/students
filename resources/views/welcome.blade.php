@@ -83,9 +83,9 @@
                 </div>
 
                 <div class="links">
-                    <a href="{{ route('students.index') }}">Students list</a>
-                    <a href="">Groups</a>
-                    <a href="">Subjects</a>
+                    <a href="{{ route('students.index') }}">Students</a>
+                    <a href="{{ route('groups.index') }}">Groups</a>
+                    <a href="{{ route('subjects.index') }}">Subjects</a>
                 </div>
             </div>
         </div>

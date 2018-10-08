@@ -18,14 +18,23 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        .filter-form
+        {
+            padding-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
+
         @component('layouts.navigation')
         @endcomponent
+
         <main class="py-4">
             @yield('content')
         </main>
+
     </div>
 </body>
 </html>

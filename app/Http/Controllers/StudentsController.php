@@ -22,21 +22,28 @@ class StudentsController extends Controller
 
     public function create()
     {
-        return view('students.create');
+        return view('students.create',['students' => $this->students]);
     }
 
     public function store(StudentRequest $request)
     {
         Student::create($request->all());
+        return redirect('students/');
     }
 
+    public function edit(Student $student)
+    {
+        return view('students.edit',['student' => $student,'students' => $this->students]);
+    }
     public function update(StudentRequest $request, Student $student)
     {
         $student->update($request->all());
+        return redirect('students/');
     }
 
     public function destroy(Student $student)
     {
         $student->delete();
+        return redirect('students/');
     }
 }

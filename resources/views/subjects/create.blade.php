@@ -3,7 +3,7 @@
 @section('content')
     @include('otherComponents.errors.validError')
 
-    @component('otherComponents.forms.createStudent', ['students' => $students])
+    @component('otherComponents.forms.createSubject')
     @endcomponent
 
 @endsection

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-    protected $fillable = ['group_name ', 'description'];
+    protected $fillable = ['group_name', 'description'];
     public $timestamps = false;
 
     public function student()
