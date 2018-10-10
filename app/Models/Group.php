@@ -11,14 +11,14 @@ class Group extends Model
 
     public function student()
     {
-      return $this->hasMany('App\Models\Student');
+        return $this->hasMany('App\Models\Student');
     }
 
     public function mark()
     {
-      return $this->hasManyThrough(
-          'App\Models\Mark', 'App\Models\Student',
-          'group_id', 'student_id', 'id'
+        return $this->hasManyThrough(
+            'App\Models\Mark', 'App\Models\Student',
+            'group_id', 'student_id', 'id'
       );
     }
 

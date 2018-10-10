@@ -18,7 +18,7 @@ $factory->defineAS(App\Models\Student::class, 'marks', function (Faker $faker) {
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'patronymic' => $faker->firstName,
-        'date_of_birthday' => $faker->dateTimeThisCentury->format('Y-m-d'),
+        'date_of_birthday' => $faker->dateTimeBetween('-30 years', '-15 years')->format('Y-m-d'),
         'group_id' => $faker->randomElement(App\Models\Group::pluck('id')->toArray()),
     ];
 });

@@ -1,6 +1,6 @@
 <div class="container">
     <form method="post" action="{{ route('students.update', $student->id) }}">
-        {{method_field('PUT')}}
+        {{ method_field('PUT') }}
         <div class="justify-content-md-center">
 
             <div class="col-md-6 form-group ">

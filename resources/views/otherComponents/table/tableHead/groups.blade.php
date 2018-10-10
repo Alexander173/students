@@ -5,7 +5,7 @@
         <th>Описание</th>
         <th>Средняя по группе</th>
         @foreach ($groups->first()->mark->first()->subject->all() as $subject)
-        <th>{{ $subject->subject_name }}</th>
+            <th>{{ $subject->subject_name }}</th>
         @endforeach
         <th>Удалить группу</th>
         <th>Редактировать</th>

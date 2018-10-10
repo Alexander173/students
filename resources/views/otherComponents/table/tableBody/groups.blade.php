@@ -4,10 +4,14 @@
             <td> {{ $group->id }} </td>
             <td> {{ $group->group_name }} </td>
             <td> {{ $group->description }} </td>
-            @foreach ($avg_groups as $avg_group)
-                {{dd($avg_group)}}
-                @if ($avg_group[$group->id]['avg_group'] != null)
-                    <td> {{$avg_group}} </td>
+            @if ($avg_groups[$group->id]['avg_group'] != null)
+                <td> {{ round($avg_groups[$group->id]['avg_group'], 2) }} </td>
+            @else
+                <td> - </td>
+            @endif
+            @foreach ($groups->first()->mark->first()->subject->all() as $subject)
+                @if (isset($avg_groups[$group->id][$subject->subject_name]))
+                    <td> {{ round($avg_groups[$group->id][$subject->subject_name], 2) }} </td>
                 @else
                     <td> - </td>
                 @endif
@@ -15,7 +19,7 @@
             <td>
                 <form method="post" action="{{ route('groups.destroy', $group->id) }}">
                     @csrf
-                    {{method_field('DELETE')}}
+                    {{ method_field('DELETE') }}
                     <button type="submit" class="btn btn-primary btn-sm">Delete</button>
                 </form>
             </td>

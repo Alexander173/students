@@ -4,7 +4,9 @@
     @include('otherComponents.forms.filter')
 
     @if(isset($students))
-        @component('otherComponents.table.students', ['students' => $students])
+        @component('otherComponents.table.students', ['students' => $students,
+            'avg_groups' => $avg_groups,
+            'avg_students' => $avg_students])
         @endcomponent
     @endif
     <div class="text-center">

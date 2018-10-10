@@ -1,9 +1,11 @@
 <div class="container-fluid">
-    <table class="table table-bordered table-hover table-striped">
-            @component('otherComponents.table.tableHead.students')
+    <table class="table table-bordered">
+            @component('otherComponents.table.tableHead.students',['students' => $students])
             @endcomponent
 
-            @component('otherComponents.table.tableBody.students', ['students' => $students])
+            @component('otherComponents.table.tableBody.students', ['students' => $students,
+                'avg_groups' => $avg_groups,
+                'avg_students' => $avg_students])
             @endcomponent
     </table>
 </div>

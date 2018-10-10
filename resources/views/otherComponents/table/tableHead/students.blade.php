@@ -1,10 +1,15 @@
-<thead class="table table-bordered table-hover table-striped">
+<thead class="table table-bordered  thead-dark">
     <tr>
         <th>#</th>
+        <th>Группа</th>
+        <th>Средняя по группе</th>
         <th>Полное имя</th>
         <th>Дата рождения</th>
-        <th>Группа</th>
+        <th>Средняя оценка</th>
+        @foreach ($students->first()->mark->first()->subject->all() as $subject)
+            <th>{{ $subject->subject_name }}</th>
+        @endforeach
+        <th>Анкета</th>
         <th>Удалить студента</th>
-        <th>Редактировать</th>
     </tr>
 </thead>

@@ -9,6 +9,7 @@ use App\Http\Requests\GroupRequest;
 class GroupController extends Controller
 {
     protected $groups;
+    public $avg_groups;
 
     public function __construct()
     {
@@ -19,15 +20,9 @@ class GroupController extends Controller
     {
         $groups = Group::with('mark')->get();
 
-        foreach ($groups as $group) {
-            $avg_groups[$group->id]['avg_group'] = $group->mark->avg('mark');
-            foreach ($group->mark as $mark) {
-                $avg_groups[$group->id][$mark->subject->subject_name] = $mark->
-                where('subject_id', $mark->subject_id)->avg('mark');
-            }
-        }
+        GroupController::groupsAvg($this->avg_groups);
 
-        return view('groups.index',['groups' => $groups, 'avg_groups' => $avg_groups]);
+        return view('groups.index', ['groups' => $groups, 'avg_groups' => $this->avg_groups]);
     }
 
     public function create()
@@ -55,5 +50,18 @@ class GroupController extends Controller
     {
         $group->delete();
         return redirect('groups/');
+    }
+
+    public static function groupsAvg(&$avg_groups)
+    {
+        $groups = Group::with('mark')->get();
+
+        foreach ($groups as $group) {
+            $avg_groups[$group->id]['avg_group'] = $group->mark->avg('mark');
+            foreach ($group->mark as $mark) {
+                $avg_groups[$group->id][$mark->subject->subject_name] = $mark->
+                where('subject_id', $mark->subject_id)->avg('mark');
+            }
+        }
     }
 }
