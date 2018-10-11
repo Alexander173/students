@@ -58,9 +58,8 @@ class GroupController extends Controller
 
         foreach ($groups as $group) {
             $avg_groups[$group->id]['avg_group'] = $group->mark->avg('mark');
-            foreach ($group->mark as $mark) {
-                $avg_groups[$group->id][$mark->subject->subject_name] = $mark->
-                where('subject_id', $mark->subject_id)->avg('mark');
+            foreach ($group->mark->groupBy('subject_id') as $mark) {
+                $avg_groups[$group->id][$mark->first()->subject->subject_name] = $mark->avg('mark');
             }
         }
     }

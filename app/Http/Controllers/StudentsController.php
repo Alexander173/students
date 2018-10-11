@@ -14,13 +14,13 @@ class StudentsController extends Controller
 
     public function __construct()
     {
-        GroupController::groupsAvg($this->avg_groups);
+        $this->studentsAvg();
         $this->students = Student::all();
     }
 
     public function index()
     {
-        $this->studentsAvg();
+        GroupController::groupsAvg($this->avg_groups);
 
         return view('students.index', ['students' => $this->students,
             'avg_groups' => $this->avg_groups,
@@ -30,7 +30,9 @@ class StudentsController extends Controller
 
     public function show(Student $student)
     {
-        return view('students.show', ['student' => $student]);
+        return view('students.show', ['student' => $student,
+            'avg_student' => $this->avg_students
+            ]);
     }
 
     public function create()

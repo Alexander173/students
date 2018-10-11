@@ -23,6 +23,23 @@
         {
             padding-bottom: 10px;
         }
+        .img-set
+        {
+            margin: 5px;
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+        .img-load-form
+        {
+            float:left;
+            width: 23%;
+            height: 20%;
+        }
+        .table-about
+        {
+            width: 70%;
+        }
     </style>
 </head>
 <body>

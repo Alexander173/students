@@ -1,7 +1,6 @@
 <tbody>
     @foreach ($students->groupBy('group_id') as $group)
         <tr>
-            <td rowspan="{{ $group->count() + 1 }}"> {{ $group->first()->group_id }} </td>
             <td rowspan="{{ $group->count() + 1 }}"> {{ $group->first()->group->group_name }} </td>
             @if ($avg_groups[$group->first()->group_id]['avg_group'] != null)
                 <td rowspan="{{ $group->count() + 1 }}"> {{ round($avg_groups[$group->first()->group_id]['avg_group'], 2) }} </td>

@@ -1,6 +1,5 @@
-<thead class="table table-bordered  thead-dark">
+<thead class="table table-bordered thead-dark">
     <tr>
-        <th>#</th>
         <th>Группа</th>
         <th>Средняя по группе</th>
         <th>Полное имя</th>

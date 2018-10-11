@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">
-        @if(isset($students))
-            @component('otherComponents.aboutStudent', ['student' => $student])
+        @if(isset($student))
+            @component('otherComponents.aboutStudent', ['student' => $student, 'avg_student' => $avg_student])
             @endcomponent
         @endif
         <div class="row justify-content-between">
@@ -13,12 +13,12 @@
                 </a>
             </div>
             <div class="">
-                <a class="btn btn-primary" href="{{ route('students.edit', $student->id) }}">
+                <a class="btn btn-primary" href="">
                     Изменить оценки
                 </a>
             </div>
             <div class="">
-                <a class="btn btn-primary" href="{{ route('students.edit', $student->id) }}">
+                <a class="btn btn-primary" href="">
                     Добавить оценок
                 </a>
             </div>

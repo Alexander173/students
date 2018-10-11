@@ -19,6 +19,11 @@ class Student extends Model
         return $this->hasMany('App\Models\Mark');
     }
 
+    public function image()
+    {
+        return $this->hasOne('App\Models\Image');
+    }
+
     public function scopeGroup($query, $group_id)
     {
         if ((request()->has('group_id')) && (request()->group_id != null)) {

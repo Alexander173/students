@@ -22,5 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('students', 'StudentsController');
 Route::resource('groups','GroupController');
 Route::resource('subjects','SubjectsController');
-Route::resource('image','ImageController');
+Route::resource('students.image','ImageController');
 Route::resource('students.mark','MarkController');
