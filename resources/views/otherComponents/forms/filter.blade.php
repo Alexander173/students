@@ -1,5 +1,5 @@
 <div class="filter-form container">
-    <form method="POST" action="">
+    <form method="POST" action="{{ route('students.index') }}">
         @csrf
         <div class="row justify-content-md-center">
 

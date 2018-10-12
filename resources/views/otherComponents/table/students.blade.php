@@ -8,4 +8,5 @@
                 'avg_students' => $avg_students])
             @endcomponent
     </table>
+    {{ $students->render() }}
 </div>

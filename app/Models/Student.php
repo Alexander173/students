@@ -24,21 +24,24 @@ class Student extends Model
         return $this->hasOne('App\Models\Image');
     }
 
-    public function scopeGroup($query, $group_id)
+    public function scopeFilter($query)
     {
-        if ((request()->has('group_id')) && (request()->group_id != null)) {
-            return $query->where('group_id', $group_id);
-        } else {
-            return $query;
+        if (request('name') && (request()->name)) {
+            return $quert = $query->Name(request('name'));
         }
+
+        if (request('group_id') && (request()->group_id)) {
+            return $query = $query->Group();
+        }
+    }
+
+    public function scopeGroup($query)
+    {
+        return $query->where('group_id', request('group_id'));
     }
 
     public function scopeName($query, $name)
     {
-        if ((request()->has('first_name')) && (request()->first_name != null)) {
-            return $query->where('first_name', $name);
-        } else {
-            return $query;
-        }
+        $name && $query->where('first_name', 'like', "%{$name}%");
     }
 }

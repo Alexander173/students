@@ -24,7 +24,15 @@ class StudentsController extends Controller
     {
         GroupController::groupsAvg($this->avg_groups);
 
-        return view('students.index', ['students' => $this->students,
+        $students = Student::with('mark')
+                        ->Filter()
+                        ->paginate(5)
+                        ->appends([
+                            'group_id' => request()->group_id,
+                            'first_name' => request()->first_name
+                        ]);
+
+        return view('students.index', ['students' => $students,
             'avg_groups' => $this->avg_groups,
             'avg_students' => $this->avg_students
             ]);
