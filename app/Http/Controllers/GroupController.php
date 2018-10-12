@@ -33,8 +33,10 @@ class GroupController extends Controller
     public function store(GroupRequest $request)
     {
         Group::create($request->all());
+
         return redirect('groups/');
     }
+
     public function edit(Group $group)
     {
         return view('groups.edit', ['group' => $group]);
@@ -43,12 +45,14 @@ class GroupController extends Controller
     public function update(GroupRequest $request, Group $group)
     {
         $group->update($request->all());
+
         return redirect('groups/');
     }
 
     public function destroy(Group $group)
     {
         $group->delete();
+
         return redirect('groups/');
     }
 
@@ -58,6 +62,7 @@ class GroupController extends Controller
 
         foreach ($groups as $group) {
             $avg_groups[$group->id]['avg_group'] = $group->mark->avg('mark');
+
             foreach ($group->mark->groupBy('subject_id') as $mark) {
                 $avg_groups[$group->id][$mark->first()->subject->subject_name] = $mark->avg('mark');
             }

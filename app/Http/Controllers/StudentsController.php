@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Student;
 use App\Http\Requests\StudentRequest;
+
+use App\Models\Student;
+use App\Models\Subject;
 
 class StudentsController extends Controller
 {
@@ -30,6 +32,8 @@ class StudentsController extends Controller
 
     public function show(Student $student)
     {
+        $subjects = Subject::all();
+
         return view('students.show', ['student' => $student,
             'avg_student' => $this->avg_students
             ]);
@@ -43,22 +47,26 @@ class StudentsController extends Controller
     public function store(StudentRequest $request)
     {
         Student::create($request->all());
+
         return redirect('students/');
     }
 
     public function edit(Student $student)
     {
-        return view('students.edit',['student' => $student,'students' => $this->students]);
+        return view('students.edit',['student' => $student, 'students' => $this->students]);
     }
+
     public function update(StudentRequest $request, Student $student)
     {
         $student->update($request->all());
-        return redirect('students/');
+
+        return redirect('students/' . $student->id);
     }
 
     public function destroy(Student $student)
     {
         $student->delete();
+
         return redirect('students/');
     }
 
@@ -68,6 +76,7 @@ class StudentsController extends Controller
 
         foreach ($students as $student) {
             $this->avg_students[$student->id]['avg'] = $student->mark->avg('mark');
+
             foreach ($student->mark->groupBy('subject_id') as $mark) {
                 $this->avg_students[$student->id][$mark->first()->subject->subject_name] = $mark->avg('mark');
             }

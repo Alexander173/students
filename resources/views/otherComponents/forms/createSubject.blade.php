@@ -1,5 +1,5 @@
 <div class="container">
-    <form method="post" action="{{ route('subjects.store') }}">
+    <form method="POST" action="{{ route('subjects.store') }}">
         <div class="justify-content-md-center">
             <div class="col-md-6 form-group ">
                 <input class="form-control" placeholder="Предмет" name="subject_name" type="text">

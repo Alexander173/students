@@ -1,5 +1,5 @@
 <div class="container">
-    <form method="post" action="{{ route('groups.store') }}">
+    <form method="POST" action="{{ route('groups.store') }}">
         <div class="justify-content-md-center">
             <div class="col-md-6 form-group ">
                 <input class="form-control" placeholder="Название" name="group_name" type="text">

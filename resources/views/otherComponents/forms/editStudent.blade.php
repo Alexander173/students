@@ -1,5 +1,5 @@
 <div class="container">
-    <form method="post" action="{{ route('students.update', $student->id) }}">
+    <form method="POST" action="{{ route('students.update', $student->id) }}">
         {{ method_field('PUT') }}
         <div class="justify-content-md-center">
 

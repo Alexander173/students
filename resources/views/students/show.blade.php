@@ -7,21 +7,16 @@
             @endcomponent
         @endif
         <div class="row justify-content-between">
-            <div class="">
-                <a class="btn btn-primary" href="{{ route('students.edit', $student->id) }}">
-                    Редактировать студента
-                </a>
-            </div>
-            <div class="">
-                <a class="btn btn-primary" href="">
-                    Изменить оценки
-                </a>
-            </div>
-            <div class="">
-                <a class="btn btn-primary" href="">
-                    Добавить оценок
-                </a>
-            </div>
+            <a class="btn btn-secondary" href="{{ route('students.edit', $student->id) }}">
+                Редактировать студента
+            </a>
+            <a class="btn btn-secondary" href="{{ route('students.mark.edit', [$student->id, $student->mark->first()]) }}">
+                Изменить оценки
+            </a>
+
+            <a class="btn btn-secondary" href="{{ route('students.mark.create', $student->id) }}">
+                Добавить оценок
+            </a>
         </div>
     </div>
 @endsection

@@ -1,5 +1,5 @@
 <div class="filter-form container">
-    <form method="post" action="">
+    <form method="POST" action="">
         @csrf
         <div class="row justify-content-md-center">
 

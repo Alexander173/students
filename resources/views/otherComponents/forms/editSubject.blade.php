@@ -1,5 +1,5 @@
 <div class="container">
-    <form method="post" action="{{ route('subjects.update', $subject->id) }}">
+    <form method="POST" action="{{ route('subjects.update', $subject->id) }}">
         {{ method_field('PUT') }}
         <div class="justify-content-md-center">
             <div class="col-md-6 form-group ">

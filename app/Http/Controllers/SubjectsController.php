@@ -27,6 +27,7 @@ class SubjectsController extends Controller
     public function store(SubjectRequest $request)
     {
         Subject::create($request->all());
+
         return redirect('subjects/');
     }
 
@@ -38,12 +39,14 @@ class SubjectsController extends Controller
     public function update(SubjectRequest $request, Subject $subject)
     {
         $subject->update($request->all());
+
         return redirect('subjects/');
     }
 
     public function destroy(Subject $subject)
     {
         $subject->delete();
+
         return redirect('subjects/');
     }
 }

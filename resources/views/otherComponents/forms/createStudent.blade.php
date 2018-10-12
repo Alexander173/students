@@ -1,5 +1,5 @@
 <div class="container">
-    <form method="post" action="{{ route('students.store') }}">
+    <form method="POST" action="{{ route('students.store') }}">
         <div class="justify-content-md-center">
             <div class="col-md-6 form-group ">
                 <input class="form-control" placeholder="Имя" name="first_name" type="text">
@@ -30,7 +30,7 @@
         </div>
 
         <div class="col-md-2">
-             <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary">Create</button>
         </div>
         @csrf
     </form>
