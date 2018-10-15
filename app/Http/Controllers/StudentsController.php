@@ -26,7 +26,6 @@ class StudentsController extends Controller
         GroupController::groupsAvg($this->avg_groups);
         $groups = Group::all();
 
-        dump(request());
         $students = Student::with('mark')
                         ->name(request()->first_name)
                         ->groups()
@@ -69,7 +68,7 @@ class StudentsController extends Controller
 
     public function edit(Student $student)
     {
-        return view('students.edit',['student' => $student, 'students' => $this->students]);
+        return view('students.edit', ['student' => $student, 'students' => $this->students]);
     }
 
     public function update(StudentRequest $request, Student $student)

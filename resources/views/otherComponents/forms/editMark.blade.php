@@ -13,13 +13,13 @@
                 @foreach ($marks as $mark)
                     @if ($subject->id == $mark->subject_id)
                         <select class="custom-select custom-select-sm" name="Update[{{ $mark->id }}]" type="number">
-                            @for ($i = 2; $i <= 5; $i++)
+                            @foreach (range(2,5) as $i)
                                 @if ($mark->mark == $i)
                                     <option value="{{ $i }}" type="number" selected> {{ $i }} </option>
                                 @else
                                     <option value="{{ $i }}" type="number"> {{ $i }} </option>
                                 @endif
-                            @endfor
+                            @endforeach
                         </select>
                     @endif
                 @endforeach

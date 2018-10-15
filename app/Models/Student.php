@@ -31,7 +31,7 @@ class Student extends Model
             if (request('average') == 3) {
                 foreach ($avg_students as $key => $value) {
                     if ($avg_students[$key]['avg'] <= 3) {
-                        $array[] = $key;  
+                        $array[] = $key;
                     }
                 }
                 return $query->whereIn('id', $array);
@@ -40,7 +40,7 @@ class Student extends Model
             if (request('average') == 4) {
                 foreach ($avg_students as $key => $value) {
                     if (($avg_students[$key]['avg'] > 3) && ($avg_students[$key]['avg'] < 4.5)) {
-                        $array[] = $key;  
+                        $array[] = $key;
                     }
                 }
                 return $query->whereIn('id', $array);
@@ -49,7 +49,7 @@ class Student extends Model
             if (request('average') == 5) {
                 foreach ($avg_students as $key => $value) {
                     if ($avg_students[$key]['avg'] >= 4.5) {
-                        $array[] = $key;  
+                        $array[] = $key;
                     }
                 }
                     return $query->whereIn('id', $array);
