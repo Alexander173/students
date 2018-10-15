@@ -5,9 +5,11 @@
         <th>Полное имя</th>
         <th>Дата рождения</th>
         <th>Средняя оценка</th>
-        @foreach ($students->first()->mark->first()->subject->all() as $subject)
-            <th>{{ $subject->subject_name }}</th>
-        @endforeach
+        @if (!$students->isEmpty())
+            @foreach ($students->first()->mark->first()->subject->all() as $subject)
+                <th>{{ $subject->subject_name }}</th>
+            @endforeach
+        @endif
         <th>Анкета</th>
         <th>Удалить студента</th>
     </tr>

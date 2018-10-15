@@ -7,6 +7,7 @@ use App\Http\Requests\StudentRequest;
 
 use App\Models\Student;
 use App\Models\Subject;
+use App\Models\Group;
 
 class StudentsController extends Controller
 {
@@ -23,19 +24,26 @@ class StudentsController extends Controller
     public function index()
     {
         GroupController::groupsAvg($this->avg_groups);
+        $groups = Group::all();
 
+        dump(request());
         $students = Student::with('mark')
-                        ->Filter()
-                        ->paginate(5)
+                        ->name(request()->first_name)
+                        ->groups()
+                        ->average($this->avg_students)
+                        ->paginate(request()->page_count)
                         ->appends([
                             'group_id' => request()->group_id,
-                            'first_name' => request()->first_name
+                            'first_name' => request()->first_name,
+                            'page_count' => request()->page_count,
+                            'average' => request()->average
                         ]);
 
-        return view('students.index', ['students' => $students,
-            'avg_groups' => $this->avg_groups,
-            'avg_students' => $this->avg_students
-            ]);
+        return view('students.index', [ 'students' => $students,
+                                        'avg_groups' => $this->avg_groups,
+                                        'avg_students' => $this->avg_students,
+                                        'groups' => $groups
+                                        ]);
     }
 
     public function show(Student $student)

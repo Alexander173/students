@@ -20,9 +20,9 @@
             <div class="col-md-2 form-group">
                 <select class="form-control custom-select custom-select-sm" name="group_id">
                     <option selected value="" type="number">Choose group</option>
-                        @foreach($students->groupBy('group_id') as $group)
-                            <option value="{{ $group->first()->id }}" type="number">
-                                {{ $group->first()->group->group_name }}
+                        @foreach($students->first()->group->all() as $group)
+                            <option value="{{ $group->id }}" type="number">
+                                {{ $group->group_name }}
                             </option>
                         @endforeach
                 </select>

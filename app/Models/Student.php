@@ -24,24 +24,56 @@ class Student extends Model
         return $this->hasOne('App\Models\Image');
     }
 
-    public function scopeFilter($query)
+    public function scopeAverage($query, $avg_students)
     {
-        if (request('name') && (request()->name)) {
-            return $quert = $query->Name(request('name'));
+        if (request('average') && (request()->average)) {
+
+            if (request('average') == 3) {
+                foreach ($avg_students as $key => $value) {
+                    if ($avg_students[$key]['avg'] <= 3) {
+                        $array[] = $key;  
+                    }
+                }
+                return $query->whereIn('id', $array);
+            }
+
+            if (request('average') == 4) {
+                foreach ($avg_students as $key => $value) {
+                    if (($avg_students[$key]['avg'] > 3) && ($avg_students[$key]['avg'] < 4.5)) {
+                        $array[] = $key;  
+                    }
+                }
+                return $query->whereIn('id', $array);
+            }
+
+            if (request('average') == 5) {
+                foreach ($avg_students as $key => $value) {
+                    if ($avg_students[$key]['avg'] >= 4.5) {
+                        $array[] = $key;  
+                    }
+                }
+                    return $query->whereIn('id', $array);
+            }
         }
 
-        if (request('group_id') && (request()->group_id)) {
-            return $query = $query->Group();
-        }
+        return $query;
     }
 
-    public function scopeGroup($query)
+    public function scopeGroups($query)
     {
-        return $query->where('group_id', request('group_id'));
+        if (request('group_id') && (request()->group_id)) {
+            return $query->where('group_id', request('group_id'));
+        }
+        return $query;
     }
 
     public function scopeName($query, $name)
     {
-        $name && $query->where('first_name', 'like', "%{$name}%");
+        if (request('first_name') && (request()->first_name)) {
+            return $query->where('first_name', 'LIKE', "%{$name}%")
+                            ->orWhere('last_name', 'LIKE', "%{$name}%")
+                            ->orWhere('patronymic', 'LIKE', "%{$name}%");
+        }
+        return $query;
     }
 }
