@@ -1,5 +1,12 @@
 <div class="d-flex justify-content-center text-center">
     <form method="POST" class="form-create-mark" action="{{ route('students.mark.store', $student->id) }}">
+       
+       @if(Session::has('message'))
+            <div class="alert alert-danger">
+                <p class="text-center font-italic">{{ Session::get('message') }} </p>
+            </div>
+        @endif
+
         @foreach ($subjects as $subject)
             <label>
                 <span class="badge badge-pill badge-secondary">

@@ -19,6 +19,11 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

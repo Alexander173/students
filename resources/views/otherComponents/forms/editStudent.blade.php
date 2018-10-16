@@ -1,4 +1,11 @@
 <div class="container">
+
+    @if(Session::has('message'))
+        <div class="alert alert-danger">
+            <p class="text-center font-italic">{{ Session::get('message') }} </p>
+        </div>
+    @endif
+    
     <form method="POST" action="{{ route('students.update', $student->id) }}">
         {{ method_field('PUT') }}
         <div class="justify-content-md-center">

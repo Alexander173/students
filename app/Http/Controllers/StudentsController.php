@@ -8,6 +8,10 @@ use App\Http\Requests\StudentRequest;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Group;
+use App\User;
+
+use Auth;
+use Gate;
 
 class StudentsController extends Controller
 {
@@ -49,9 +53,7 @@ class StudentsController extends Controller
     {
         $subjects = Subject::all();
 
-        return view('students.show', ['student' => $student,
-            'avg_student' => $this->avg_students
-            ]);
+        return view('students.show', ['student' => $student, 'avg_student' => $this->avg_students]);
     }
 
     public function create()
@@ -61,6 +63,10 @@ class StudentsController extends Controller
 
     public function store(StudentRequest $request)
     {
+        if (StudentsController::checkAuth()) {
+            return back()->with(['message' => 'У вас нет прав']);
+        }
+        
         Student::create($request->all());
 
         return redirect('students/');
@@ -73,6 +79,10 @@ class StudentsController extends Controller
 
     public function update(StudentRequest $request, Student $student)
     {
+        if (StudentsController::checkAuth()) {
+            return back()->with(['message' => 'У вас нет прав']);
+        }
+
         $student->update($request->all());
 
         return redirect('students/' . $student->id);
@@ -80,6 +90,10 @@ class StudentsController extends Controller
 
     public function destroy(Student $student)
     {
+         if (StudentsController::checkAuth()) {
+            return back()->with(['message' => 'У вас нет прав']);
+        }
+
         $student->delete();
 
         return redirect('students/');
@@ -96,5 +110,10 @@ class StudentsController extends Controller
                 $this->avg_students[$student->id][$mark->first()->subject->subject_name] = $mark->avg('mark');
             }
         }
+    }
+
+    public function checkAuth()
+    {          
+        return Gate::denies('editEntity', Student::class);
     }
 }

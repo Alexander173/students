@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Subject;
 use App\Http\Requests\SubjectRequest;
 
+use Gate;
+
 class SubjectsController extends Controller
 {
     protected $subjects;
@@ -26,6 +28,10 @@ class SubjectsController extends Controller
 
     public function store(SubjectRequest $request)
     {
+        if (SubjectsController::checkAuth()) {
+            return back()->with(['message' => 'У вас нет прав']);
+        }
+
         Subject::create($request->all());
 
         return redirect('subjects/');
@@ -38,6 +44,10 @@ class SubjectsController extends Controller
 
     public function update(SubjectRequest $request, Subject $subject)
     {
+        if (SubjectsController::checkAuth()) {
+            return back()->with(['message' => 'У вас нет прав']);
+        }
+
         $subject->update($request->all());
 
         return redirect('subjects/');
@@ -45,8 +55,17 @@ class SubjectsController extends Controller
 
     public function destroy(Subject $subject)
     {
+       if (SubjectsController::checkAuth()) {
+            return back()->with(['message' => 'У вас нет прав']);
+        }
+
         $subject->delete();
 
         return redirect('subjects/');
+    }
+
+    public function checkAuth()
+    {
+        return Gate::denies('editEntity', SUbject::class);
     }
 }
