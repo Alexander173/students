@@ -51,6 +51,10 @@ class StudentsController extends Controller
 
     public function show(Student $student)
     {
+        if (StudentsController::checkAuth()) {
+            return back()->with(['message' => 'У вас нет прав']);
+        }
+
         $subjects = Subject::all();
 
         return view('students.show', ['student' => $student, 'avg_student' => $this->avg_students]);
@@ -66,7 +70,7 @@ class StudentsController extends Controller
         if (StudentsController::checkAuth()) {
             return back()->with(['message' => 'У вас нет прав']);
         }
-        
+
         Student::create($request->all());
 
         return redirect('students/');
@@ -113,7 +117,7 @@ class StudentsController extends Controller
     }
 
     public function checkAuth()
-    {          
+    {
         return Gate::denies('editEntity', Student::class);
     }
 }

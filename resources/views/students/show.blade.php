@@ -15,7 +15,7 @@
                 <a class="btn btn-warning" href="{{ route('students.mark.create', $student->id) }}">
                 Изменить оценки
                 </a>
-            @else 
+            @else
                 <a class="btn btn-warning" href="{{ route('students.mark.edit', [$student->id, $student->mark->first()]) }}">
                     Изменить оценки
                 </a>

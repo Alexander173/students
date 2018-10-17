@@ -21,10 +21,10 @@ class EditPolicy
 
     public function editEntity(User $user)
     {
-        if ($user->role->role == 'admin') {
+        if ($user->role_id == 1) {
             return true;
-        }       
+        }
 
-        return false; 
+        return false;
     }
 }

@@ -1,7 +1,7 @@
 <div class="container">
     <form method="POST" action="{{ route('subjects.store') }}">
         <div class="justify-content-md-center">
-            
+
             @if(Session::has('message'))
                 <div class="alert alert-danger">
                     <p class="text-center font-italic">{{ Session::get('message') }} </p>

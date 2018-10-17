@@ -1,12 +1,12 @@
 <div class="d-flex justify-content-center text-center">
     <form method="POST" class="form-create-mark" action="{{ route('students.mark.update', [$student->id, $marks->first()->mark]) }}">
-        
+
         @if(Session::has('message'))
             <div class="alert alert-danger">
                 <p class="text-center font-italic">{{ Session::get('message') }} </p>
             </div>
         @endif
-        
+
         @foreach ($student->mark->first()->subject->all() as $subject)
             <label>
                 <span class="badge badge-pill badge-secondary">
