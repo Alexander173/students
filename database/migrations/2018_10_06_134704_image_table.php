@@ -17,7 +17,7 @@ class ImageTable extends Migration
             $table->increments('id');
             $table->integer('student_id')->unique()->unsigned();
             $table->string('img_src')->default('images/default_image.jpg');
-      });
+        });
     }
 
     /**

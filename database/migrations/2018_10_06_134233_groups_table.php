@@ -17,7 +17,7 @@ class GroupsTable extends Migration
             $table->increments('id');
             $table->string('group_name', 20);
             $table->string('description');
-      });
+        });
     }
 
     /**

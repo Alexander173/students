@@ -20,7 +20,7 @@ class StudentsTable extends Migration
             $table->string('patronymic', 50);
             $table->date('date_of_birthday');
             $table->unsignedInteger('group_id');
-      });
+        });
     }
 
     /**

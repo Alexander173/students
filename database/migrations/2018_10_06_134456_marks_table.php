@@ -18,7 +18,7 @@ class MarksTable extends Migration
             $table->integer('student_id')->unsigned();
             $table->integer('subject_id')->unsigned();
             $table->tinyInteger('mark');
-      });
+        });
     }
 
     /**
