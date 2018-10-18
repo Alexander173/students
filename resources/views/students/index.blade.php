@@ -12,7 +12,8 @@
     @if(isset($students))
         @component('otherComponents.table.students', ['students' => $students,
             'avg_groups' => $avg_groups,
-            'avg_students' => $avg_students])
+            'avg_students' => $avg_students,
+            'subjects' => $subjects])
         @endcomponent
     @endif
     <div class="text-center">

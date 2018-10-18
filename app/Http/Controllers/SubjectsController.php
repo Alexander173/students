@@ -23,15 +23,13 @@ class SubjectsController extends Controller
     }
     public function create()
     {
+        $this->authorize('create', Subject::class);
+
         return view('subjects.create');
     }
 
     public function store(SubjectRequest $request)
     {
-        if (SubjectsController::checkAuth()) {
-            return back()->with(['message' => 'У вас нет прав']);
-        }
-
         Subject::create($request->all());
 
         return redirect('subjects/');
@@ -39,15 +37,13 @@ class SubjectsController extends Controller
 
     public function edit(Subject $subject)
     {
+        $this->authorize('edit', Subject::class);
+
         return view('subjects.edit', ['subject' => $subject]);
     }
 
     public function update(SubjectRequest $request, Subject $subject)
     {
-        if (SubjectsController::checkAuth()) {
-            return back()->with(['message' => 'У вас нет прав']);
-        }
-
         $subject->update($request->all());
 
         return redirect('subjects/');
@@ -55,17 +51,10 @@ class SubjectsController extends Controller
 
     public function destroy(Subject $subject)
     {
-       if (SubjectsController::checkAuth()) {
-            return back()->with(['message' => 'У вас нет прав']);
-        }
+        $this->authorize('destroy', Subject::class);
 
         $subject->delete();
 
         return redirect('subjects/');
-    }
-
-    public function checkAuth()
-    {
-        return Gate::denies('editEntity', SUbject::class);
     }
 }

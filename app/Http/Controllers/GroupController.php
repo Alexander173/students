@@ -29,15 +29,13 @@ class GroupController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Group::class);
+
         return view('groups.create');
     }
 
     public function store(GroupRequest $request)
     {
-        if (GroupController::checkAuth()) {
-            return back()->with(['message' => 'У вас нет прав']);
-        }
-
         Group::create($request->all());
 
         return redirect('groups/');
@@ -45,15 +43,13 @@ class GroupController extends Controller
 
     public function edit(Group $group)
     {
+        $this->authorize('edit', Group::class);
+
         return view('groups.edit', ['group' => $group]);
     }
 
     public function update(GroupRequest $request, Group $group)
     {
-        if (GroupController::checkAuth()) {
-            return back()->with(['message' => 'У вас нет прав']);
-        }
-
         $group->update($request->all());
 
         return redirect('groups/');
@@ -61,9 +57,7 @@ class GroupController extends Controller
 
     public function destroy(Group $group)
     {
-        if (GroupController::checkAuth()) {
-            return back()->with(['message' => 'У вас нет прав']);
-        }
+        $this->authorize('destroy', Group::class);
 
         $group->delete();
 
@@ -81,10 +75,5 @@ class GroupController extends Controller
                 $avg_groups[$group->id][$mark->first()->subject->subject_name] = $mark->avg('mark');
             }
         }
-    }
-
-    public function checkAuth()
-    {
-        return Gate::denies('editEntity', Group::class);
     }
 }

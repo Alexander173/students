@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        @include('otherComponents.errors.validError')
+        @include('otherComponents.errors.validate')
 
         @component('otherComponents.forms.createMark', ['student' => $student, 'subjects' => $subjects])
         @endcomponent

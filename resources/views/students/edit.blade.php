@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('otherComponents.errors.validError')
+    @include('otherComponents.errors.validate')
 
     @component('otherComponents.forms.editStudent', ['students' => $students, 'student' => $student])
     @endcomponent

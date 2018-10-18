@@ -4,25 +4,21 @@
 
         <form method="POST" action ="{{ route('students.image.store', $student->id) }}" enctype="multipart/form-data">
             @csrf
-
             <div class="custom-file">
-                <input class="custom-file-input" type="file" id="customFile" name="photo" required>
                 <label class="custom-file-label" for="customFile"> Choose file </label>
+                <input class="custom-file-input" type="file" id="customFile" name="photo" accept=".jpg, .jpeg, .png" required>
             </div>
-            <button class="btn btn-success btn-sm m-5" type="submit"> Загрузить </button>
+            <button class="btn btn-success btn-sm m-1" type="submit"> Загрузить </button>
         </form>
     @else
         <img src="{{ asset('storage/img_lk/'. $student->image->img_src) }}" class="img-responsive rounded-circle border-primary img-thumbnail img-set"/>
-
         <form method="POST" action ="{{ route('students.image.update', [$student->id, $student->image->id]) }}" enctype="multipart/form-data">
             @csrf
-
             <div class="custom-file">
-                <input class="custom-file-input" type="file" id="customFile" name="photo" required>
                 <label class="custom-file-label" for="customFile"> Choose file </label>
+                <input class="custom-file-input" type="file" id="customFile" name="photo" accept=".jpg, .jpeg, .png" required>
             </div>
             <button class="btn btn-success btn-sm m-1" type="submit"> Загрузить </button>
-
             {{ method_field('PUT') }}
         </form>
     @endif
@@ -35,8 +31,5 @@
             Группа: {{ $student->group->group_name }}
         </p>
     </span>
-
-    @if(Session::has('extension_error'))
-        <p class="text-center font-italic">{{ Session::get('extension_error') }} </p>
-    @endif
+    @include('otherComponents.errors.validate')
 </div>

@@ -14,6 +14,8 @@ class MarkController extends Controller
 {
     public function create(Student $student)
     {
+        $this->authorize('create', Mark::class);
+
         $subjects = Subject::all();
 
         return view('mark.create', ['student' => $student, 'subjects' => $subjects]);
@@ -21,10 +23,6 @@ class MarkController extends Controller
 
     public function store(Request $request, Student $student)
     {
-        if (MarkController::checkAuth()) {
-            return back()->with(['message' => 'У вас нет прав']);
-        }
-
         foreach ($request->Create as $subject_id => $subject_marks) {
             foreach ($subject_marks as $mark) {
                 if ($mark > 1) {
@@ -37,6 +35,8 @@ class MarkController extends Controller
 
     public function edit(Student $student, Mark $marks)
     {
+        $this->authorize('edit', Mark::class);
+
         $marks = Mark::where('student_id', $student->id)->get();
 
         return view('mark.edit', ['student' => $student, 'marks' => $marks]);
@@ -44,10 +44,6 @@ class MarkController extends Controller
 
     public function update(Request $request, Student $student, Mark $marks)
     {
-        if (MarkController::checkAuth()) {
-            return back()->with(['message' => 'У вас нет прав']);
-        }
-
         foreach ($request->Update as $mark_id => $mark) {
            Mark::where('id', $mark_id)->update(['mark' => $mark]);
         }
@@ -57,17 +53,10 @@ class MarkController extends Controller
 
     public function destroy(Student $student, Mark $mark)
     {
-        if (MarkController::checkAuth()) {
-            return back()->with(['message' => 'У вас нет прав']);
-        }
+        $this->authorize('destroy', Mark::class);
 
         $mark->delete();
 
         return redirect('students/' . $student->id);
-    }
-
-    public function checkAuth()
-    {
-        return Gate::denies('editEntity', Mark::class);
     }
 }

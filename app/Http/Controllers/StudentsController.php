@@ -18,16 +18,19 @@ class StudentsController extends Controller
     protected $students;
     protected $avg_groups;
     protected $avg_students;
+    protected $subjects;
 
     public function __construct()
     {
         $this->studentsAvg();
         $this->students = Student::all();
+        $this->subjects = Subject::all();
     }
 
     public function index()
     {
         GroupController::groupsAvg($this->avg_groups);
+
         $groups = Group::all();
 
         $students = Student::with('mark')
@@ -45,32 +48,27 @@ class StudentsController extends Controller
         return view('students.index', [ 'students' => $students,
                                         'avg_groups' => $this->avg_groups,
                                         'avg_students' => $this->avg_students,
-                                        'groups' => $groups
+                                        'groups' => $groups,
+                                        'subjects' => $this->subjects
                                         ]);
     }
 
     public function show(Student $student)
     {
-        if (StudentsController::checkAuth()) {
-            return back()->with(['message' => 'У вас нет прав']);
-        }
-
-        $subjects = Subject::all();
+        $this->authorize('show', Student::class);
 
         return view('students.show', ['student' => $student, 'avg_student' => $this->avg_students]);
     }
 
     public function create()
     {
+        $this->authorize('create', Student::class);
+
         return view('students.create', ['students' => $this->students]);
     }
 
     public function store(StudentRequest $request)
     {
-        if (StudentsController::checkAuth()) {
-            return back()->with(['message' => 'У вас нет прав']);
-        }
-
         Student::create($request->all());
 
         return redirect('students/');
@@ -78,15 +76,13 @@ class StudentsController extends Controller
 
     public function edit(Student $student)
     {
+        $this->authorize('edit', Student::class);
+
         return view('students.edit', ['student' => $student, 'students' => $this->students]);
     }
 
     public function update(StudentRequest $request, Student $student)
     {
-        if (StudentsController::checkAuth()) {
-            return back()->with(['message' => 'У вас нет прав']);
-        }
-
         $student->update($request->all());
 
         return redirect('students/' . $student->id);
@@ -94,9 +90,7 @@ class StudentsController extends Controller
 
     public function destroy(Student $student)
     {
-         if (StudentsController::checkAuth()) {
-            return back()->with(['message' => 'У вас нет прав']);
-        }
+        $this->authorize('destroy', Student::class);
 
         $student->delete();
 
@@ -114,10 +108,5 @@ class StudentsController extends Controller
                 $this->avg_students[$student->id][$mark->first()->subject->subject_name] = $mark->avg('mark');
             }
         }
-    }
-
-    public function checkAuth()
-    {
-        return Gate::denies('editEntity', Student::class);
     }
 }

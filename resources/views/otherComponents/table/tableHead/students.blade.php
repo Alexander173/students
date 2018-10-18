@@ -6,7 +6,7 @@
         <th>Дата рождения</th>
         <th>Средняя оценка</th>
         @if (!$students->isEmpty())
-            @foreach ($students->first()->mark->first()->subject->all() as $subject)
+            @foreach ($subjects as $subject)
                 <th>{{ $subject->subject_name }}</th>
             @endforeach
         @endif

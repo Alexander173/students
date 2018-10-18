@@ -10,7 +10,10 @@ use App\Models\Mark;
 use App\Models\Subject;
 use App\Models\Group;
 
-use App\Policies\EditPolicy;
+use App\Policies\StudentPolicy;
+use App\Policies\MarkPolicy;
+use App\Policies\SubjectPolicy;
+use App\Policies\GroupPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -20,10 +23,10 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        Student::class => EditPolicy::class,
-        Mark::class => EditPolicy::class,
-        Subject::class => EditPolicy::class,
-        Group::class => EditPolicy::class
+        Student::class => StudentPolicy::class,
+        Mark::class => MarkPolicy::class,
+        Subject::class => SubjectPolicy::class,
+        Group::class => GroupPolicy::class
     ];
 
     /**
