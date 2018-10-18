@@ -11,7 +11,6 @@ use App\Models\Group;
 use App\User;
 
 use Auth;
-use Gate;
 
 class StudentsController extends Controller
 {

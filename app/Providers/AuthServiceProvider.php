@@ -26,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         Student::class => StudentPolicy::class,
         Mark::class => MarkPolicy::class,
         Subject::class => SubjectPolicy::class,
-        Group::class => GroupPolicy::class
+        Group::class => GroupPolicy::class,
     ];
 
     /**
