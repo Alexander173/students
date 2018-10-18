@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Subject;
 use App\Http\Requests\SubjectRequest;
 
-use Gate;
-
 class SubjectsController extends Controller
 {
     protected $subjects;

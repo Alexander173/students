@@ -8,8 +8,6 @@ use App\Models\Student;
 use App\Models\Mark;
 use App\Models\Subject;
 
-use Gate;
-
 class MarkController extends Controller
 {
     public function create(Student $student)

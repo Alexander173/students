@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Group;
 use App\Http\Requests\GroupRequest;
 
-use Gate;
-
 class GroupController extends Controller
 {
     protected $groups;

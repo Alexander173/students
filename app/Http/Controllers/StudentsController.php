@@ -10,8 +10,6 @@ use App\Models\Subject;
 use App\Models\Group;
 use App\User;
 
-use Auth;
-
 class StudentsController extends Controller
 {
     protected $students;
@@ -42,7 +40,7 @@ class StudentsController extends Controller
                             'first_name' => request()->first_name,
                             'page_count' => request()->page_count,
                             'average' => request()->average
-                        ]);
+                            ]);
 
         return view('students.index', [ 'students' => $students,
                                         'avg_groups' => $this->avg_groups,
