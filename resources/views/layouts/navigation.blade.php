@@ -13,6 +13,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('students.index') }}"> Students </a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('groups.index') }}"> Groups </a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('subjects.index') }}"> Subjects </a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('subjects.index') }}"> Categories Tree </a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
