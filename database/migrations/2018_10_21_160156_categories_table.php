@@ -19,6 +19,7 @@ class CategoriesTable extends Migration
             $table->string('description')->nullable();
             $table->nestedSet();
             $table->string('slug')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -29,6 +30,6 @@ class CategoriesTable extends Migration
      */
     public function down()
     {
-        //        
+        //
     }
 }

@@ -24,3 +24,6 @@ Route::resource('groups','GroupController');
 Route::resource('subjects','SubjectsController');
 Route::resource('students.image','ImageController');
 Route::resource('students.mark','MarkController');
+
+Route::get('categories', 'CategoriesController@index')->name('categories.index');
+Route::get('categories/{category}', 'CategoriesController@index')->name('categories.show');

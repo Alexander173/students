@@ -1,13 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use kalnoy\nestedset\src\NodeTrait;
+use Kalnoy\Nestedset\NodeTrait;
 
 class Category extends Model
 {
-    protected $guarded = [];
-
     use NodeTrait;
 }
