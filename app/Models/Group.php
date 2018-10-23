@@ -24,8 +24,6 @@ class Group extends Model
 
     public function getAverageGroupsAttribute($groups)
     {
-        $group = compact($groups);
-        dd($group);
-        return $group;
+        dd($groups);
     }
 }

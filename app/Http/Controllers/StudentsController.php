@@ -12,16 +12,9 @@ use App\User;
 
 class StudentsController extends Controller
 {
-    protected $students;
     protected $avg_groups;
     protected $avg_students;
     protected $subjects;
-
-    public function __construct()
-    {
-
-
-    }
 
     public function index()
     {
@@ -77,8 +70,8 @@ class StudentsController extends Controller
     public function edit(Student $student)
     {
         $this->authorize('edit', Student::class);
-
-        return view('students.edit', ['student' => $student, 'students' => $this->students]);
+        $groups = $student->group->all();
+        return view('students.edit', ['student' => $student, 'groups' => $groups]);
     }
 
     public function update(StudentRequest $request, Student $student)

@@ -22,7 +22,7 @@
             <div class="col-md-2 form-group">
                 <select class="form-control custom-select custom-select-sm" name="group_id">
                     <option selected value="" type="number">Choose group</option>
-                    @foreach($students->first()->group->all() as $group)
+                    @foreach($groups as $group)
                         @if ($group->id == $student->group_id)
                             <option value="{{ $group->id }}" type="number" selected>
                                 {{ $group->group_name }}
