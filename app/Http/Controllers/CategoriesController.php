@@ -21,7 +21,7 @@ class CategoriesController extends Controller
     public function create()
     {
     	$categories = Category::get()->toFlatTree();
-    	
+
     	return view('categories.create', compact('categories'));
     }
 

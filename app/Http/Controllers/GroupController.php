@@ -8,21 +8,14 @@ use App\Http\Requests\GroupRequest;
 
 class GroupController extends Controller
 {
-    protected $groups;
-    public $avg_groups;
-
-    public function __construct()
-    {
-        $this->groups = Group::all();
-    }
-
     public function index()
     {
         $groups = Group::with('mark')->get();
+        $subjects = $groups->first()->mark->first()->subject->all();
 
-        GroupController::groupsAvg($this->avg_groups);
+        GroupController::groupsAvg($avg_groups);
 
-        return view('groups.index', ['groups' => $groups, 'avg_groups' => $this->avg_groups]);
+        return view('groups.index', ['groups' => $groups, 'avg_groups' => $avg_groups, 'subjects' => $subjects]);
     }
 
     public function create()
@@ -69,8 +62,8 @@ class GroupController extends Controller
         foreach ($groups as $group) {
             $avg_groups[$group->id]['avg_group'] = $group->mark->avg('mark');
 
-            foreach ($group->mark->groupBy('subject_id') as $mark) {
-                $avg_groups[$group->id][$mark->first()->subject->subject_name] = $mark->avg('mark');
+            foreach ($group->mark->groupBy('subject_id') as $subject_id => $mark) {
+                $avg_groups[$group->id][$subject_id] = $mark->avg('mark');
             }
         }
     }

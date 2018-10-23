@@ -19,15 +19,16 @@ class StudentsController extends Controller
 
     public function __construct()
     {
-        $this->studentsAvg();
-        $this->students = Student::all();
-        $this->subjects = Subject::all();
+
+
     }
 
     public function index()
     {
         GroupController::groupsAvg($this->avg_groups);
 
+        $this->studentsAvg();
+        $this->subjects = Subject::all();
         $groups = Group::all();
 
         $students = Student::with('mark')
@@ -54,14 +55,16 @@ class StudentsController extends Controller
     {
         $this->authorize('show', Student::class);
 
+        $this->studentsAvg();
         return view('students.show', ['student' => $student, 'avg_student' => $this->avg_students]);
     }
 
     public function create()
     {
         $this->authorize('create', Student::class);
+        $groups = Group::all();
 
-        return view('students.create', ['students' => $this->students]);
+        return view('students.create', ['groups' => $groups]);
     }
 
     public function store(StudentRequest $request)
@@ -101,8 +104,8 @@ class StudentsController extends Controller
         foreach ($students as $student) {
             $this->avg_students[$student->id]['avg'] = $student->mark->avg('mark');
 
-            foreach ($student->mark->groupBy('subject_id') as $mark) {
-                $this->avg_students[$student->id][$mark->first()->subject->subject_name] = $mark->avg('mark');
+            foreach ($student->mark->groupBy('subject_id') as $subject_id => $mark) {
+                $this->avg_students[$student->id][$subject_id] = $mark->avg('mark');
             }
         }
     }

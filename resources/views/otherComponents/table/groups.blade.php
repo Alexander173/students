@@ -3,7 +3,7 @@
         @component('otherComponents.table.tableHead.groups', ['groups' => $groups])
         @endcomponent
 
-        @component('otherComponents.table.tableBody.groups', ['groups' => $groups, 'avg_groups' => $avg_groups])
+        @component('otherComponents.table.tableBody.groups', ['groups' => $groups, 'avg_groups' => $avg_groups, 'subjects' => $subjects])
         @endcomponent
     </table>
 </div>

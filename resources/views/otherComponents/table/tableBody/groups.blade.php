@@ -9,9 +9,9 @@
             @else
                 <td> - </td>
             @endif
-            @foreach ($groups->first()->mark->first()->subject->all() as $subject)
-                @if (isset($avg_groups[$group->id][$subject->subject_name]))
-                    <td> {{ round($avg_groups[$group->id][$subject->subject_name], 2) }} </td>
+            @foreach ($subjects as $subject)
+                @if (isset($avg_groups[$group->id][$subject->id]))
+                    <td> {{ round($avg_groups[$group->id][$subject->id], 2) }} </td>
                 @else
                     <td> - </td>
                 @endif

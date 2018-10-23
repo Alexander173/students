@@ -27,6 +27,7 @@ Route::resource('students.mark','MarkController');
 
 Route::get('categories', 'CategoriesController@index')->name('categories.index');
 // Route::get('categories/{id}', 'CategoriesController@show')->name('categories.show');
+
 Route::get('categories/create', 'CategoriesController@create')->name('categories.create');
 Route::post('categories/store', 'CategoriesController@store')->name('categories.store');
 Route::delete('categories/{category}', 'CategoriesController@destroy')->name('categories.destroy');

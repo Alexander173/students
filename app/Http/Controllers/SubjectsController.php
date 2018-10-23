@@ -8,16 +8,11 @@ use App\Http\Requests\SubjectRequest;
 
 class SubjectsController extends Controller
 {
-    protected $subjects;
-
-    public function __construct()
-    {
-        $this->subjects=Subject::all();
-    }
-
     public function index()
     {
-        return view('subjects.index', ['subjects' => $this->subjects]);
+        $subjects=Subject::all();
+
+        return view('subjects.index', ['subjects' => $subjects]);
     }
     public function create()
     {

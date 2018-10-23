@@ -19,8 +19,8 @@
                     @endif
 
                     @foreach ($subjects as $subject)
-                        @if (isset($avg_students[$student->id][$subject->subject_name]))
-                            <td> {{ round($avg_students[$student->id][$subject->subject_name], 2) }} </td>
+                        @if (isset($avg_students[$student->id][$subject->id]))
+                            <td> {{ round($avg_students[$student->id][$subject->id], 2) }} </td>
                         @else
                             <td> - </td>
                         @endif

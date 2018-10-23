@@ -3,7 +3,7 @@
 @section('content')
 
     @if(isset($groups))
-        @component('otherComponents.table.groups', ['groups' => $groups, 'avg_groups' => $avg_groups])
+        @component('otherComponents.table.groups', ['groups' => $groups, 'avg_groups' => $avg_groups, 'subjects' => $subjects])
         @endcomponent
     @endif
     <div class="text-center">
