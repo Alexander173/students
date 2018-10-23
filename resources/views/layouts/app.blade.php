@@ -10,19 +10,22 @@
     <title> Students </title>
 
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" 
+        crossorigin="anonymous">
+    </script>
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/addSelect.js') }}"></script>
-
+    <script src="{{ asset('js/addSelect.js') }}" defer></script>
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
-    <!-- Styles -->
-    
+    <!-- Styles --> 
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/tree.css') }}" rel="stylesheet">
 
     <style>
-
         .filter-form
         {
             padding-bottom: 10px;
@@ -61,5 +64,21 @@
         </main>
 
     </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.tree li').css('visibility', 'visible');
+        });
+
+        $(function () {
+            $('.tree li').hide();
+            $('.tree li:first').show();
+            $('.tree li').on('click', function (e) {
+                var children = $(this).find('> ul > li');
+                if (children.is(":visible")) children.hide('fast');
+                else children.show('fast');
+                e.stopPropagation();
+            });
+        });
+    </script>
 </body>
 </html>

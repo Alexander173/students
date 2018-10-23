@@ -7,8 +7,10 @@
 	            Добавить Категорию
 	        </a>
 	    </div>
-        <div class="col-md-3">
-            @include('otherComponents.recursiveTreeTemplate._template')
-        </div>
+	    <div class="col-md-6">
+	        <div class="tree">
+	            @include('otherComponents.recursiveTreeTemplate._template')
+	        </div>
+    	</div>
     </div>
 @endsection
