@@ -6,9 +6,9 @@
 	        <a class="btn btn-success btn-sm" href="{{ route('categories.create') }}">
 	            Добавить Категорию
 	        </a>
-	    </div>     
+	    </div>
         <div class="col-md-3">
             @include('otherComponents.recursiveTreeTemplate._template')
-        </div>   
+        </div>
     </div>
 @endsection
