@@ -20,28 +20,49 @@ class CategoriesController extends Controller
 
     public function create()
     {
-    	$categories = Category::get()->toFlatTree();
-
-    	return view('categories.create', compact('categories'));
+    	$category = Category::find(request()->category_id);
+    	return view('categories.create', ['category' => $category ]);
     }
 
     public function store(Request $request)
-    {
-    	$parent = Category::find($request->id);
+    {    	
+		$parent = Category::find($request->category_id);
     	$attributes = ['name' => $request->name];
     	Category::create($attributes, $parent);
-
+    	
     	return redirect('categories/');
     }
 
-    public function edit()
+    public function edit(Category $category)
     {
-    	
+    	$categories = Category::withDepth()->having('depth', '<' , 3)->get()->toFlatTree();
+
+    	return view('categories.edit', ['category' => $category, 'categories' => $categories]);	
     }
+
+   	public function update(Request $request, Category $category)
+   	{
+   		if ($request->parent_id != 0) {
+   			$category->update($request->all());
+   		}
+
+   		return redirect('categories/');
+   	}
 
     public function destroy(Category $category)
     {
-    	$category->delete();
+	    if ($category->name != 'root') {
+	    	if ($category['children']->count() > 0) {
+	    		foreach ($category->children as $children) {
+	    			$children->parent_id = $category->parent_id;
+	    			$children->save();
+	    		}
+	    		$category->delete();
+	    			    		
+	    	} else {
+	    		$category->delete();
+	    	}    	
+	    }
 
     	return redirect('categories/');
     }

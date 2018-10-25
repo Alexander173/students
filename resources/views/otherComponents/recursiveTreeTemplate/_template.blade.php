@@ -1,31 +1,38 @@
 <ul>
     @foreach ($categories as $category)
         <li>
-            <div class="d-flex align-items-center">                
+            <div class="d-flex align-items-center">
+                <i class="fa fa-folder mr-2 focus" aria-hidden="true"></i>                
                 <a class="text-dark mr-2" href="#"> {{ $category->name }} </a>
-                <span class="badge badge-primary badge-pill mr-5"> {{ $category->children->count() }} </span>
+                <span class="badge badge-success badge-pill mr-5"> {{ $category->children->count() }} </span>
                 
                 <div class="mr-2">
                     <form method="post" action="{{ route('categories.destroy', $category->id) }}">
                         @csrf
                         {{ method_field('DELETE') }}
-                        <button type="submit" class="btn-sm btn btn-secondary" href="{{ route('categories.destroy', $category->id) }}">
-                            <span class="fa fa-trash" aria-hidden="true"></span>
+                        <button type="submit" class="btn-sm btn btn-dark">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
                     </form>
                 </div>
 
+                <div class="mr-2">
+                    <a class="btn btn-sm btn-info" href="{{ route('categories.edit', $category->id) }}">     
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </a>           
+                </div>
+
                 <div class="">
-                    <form method="post" action="{{ route('categories.edit', $category->id) }}">
+                    <form method="get" action="{{ route('categories.create') }}">
                         @csrf
-                        {{ method_field('PUT') }}
-                        <button type="submit" class="btn-sm btn btn-secondary" href="{{ route('categories.destroy', $category->id) }}">
-                            <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                        <button class="btn btn-sm btn-success" type="submit">
+                            <input type="hidden" name="category_id" value="{{ $category->id }}">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
                         </button>
                     </form>
                 </div>
            </div>
-            @if (isset($category['children']))
+            @if ($category['children']->count() > 0)
                 @include('otherComponents.recursiveTreeTemplate._template', ['categories' => $category['children']])
             @endif
         </li>

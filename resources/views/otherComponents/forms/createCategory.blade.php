@@ -9,13 +9,8 @@
 
         <p> Add to parrent's choosen </p>
         <div class="col-md-4 form-group">
-            <select class="form-control custom-select" name="id">
-                <option selected value="0" type="number">Choose category</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}" type="number">
-                            {{ $category->name }}
-                        </option>
-                    @endforeach
+            <select class="form-control custom-select" name="category_id">
+                <option selected value="{{ $category->id }}" type="number"> {{ $category->name }} </option>
             </select>
         </div>
     </div>
