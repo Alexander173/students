@@ -25,4 +25,6 @@ Route::resource('subjects','SubjectsController');
 Route::resource('students.image','ImageController');
 Route::resource('students.mark','MarkController');
 
-Route::resource('categories', 'CategoriesController');
+
+Route::resource('categories', 'CategoriesController', ['except' => ['show']	]);
+Route::get('shop/{path}', 'CategoriesController@show')->where('path', '[a-zA-Z0-9/_-]+')->name('categories.show');

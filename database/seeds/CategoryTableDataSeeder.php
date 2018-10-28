@@ -15,6 +15,7 @@ class CategoryTableDataSeeder extends Seeder
         $categories = [
             [
                 'name' => 'root',
+                'path' => 'categories',
                 'children' => [
                     [
                     'name' => 'Electronics',
@@ -68,8 +69,16 @@ class CategoryTableDataSeeder extends Seeder
                 ],
             ],
         ];
+
         foreach ($categories as $category) {
             Category::create($category);
         }
+
+        $categories = Category::where('name', '!=', 'root')->get()->toFlatTree();
+    	foreach ($categories as $category) {
+    		$slug = $category->parent->path;
+    		$category->path = $slug . '/' . $category->name;
+    		$category->save();
+    	}
     }
 }

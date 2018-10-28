@@ -10,12 +10,17 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = Category::withDepth()->get()->toTree();
+
         return view('categories.index', compact('categories'));
     }
 
-    public function show(Category $category)
+    public function show($path)
     {
-   		return redirect('categories');
+    	
+    	$category = Category::where('path', $path)->first();
+    	$categories = Category::withDepth()->get()->toTree();
+    	
+   		return view('categories.show', ['category' => $category, 'categories' => $categories]);
     }
 
     public function create()
@@ -27,7 +32,7 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {    	
 		$parent = Category::find($request->category_id);
-    	$attributes = ['name' => $request->name];
+    	$attributes = ['name' => $request->name, 'path' => $parent->path . '/' . $request->name];
     	Category::create($attributes, $parent);
     	
     	return redirect('categories/');
@@ -41,10 +46,9 @@ class CategoriesController extends Controller
     }
 
    	public function update(Request $request, Category $category)
-   	{
-   		if ($request->parent_id != 0) {
-   			$category->update($request->all());
-   		}
+   	{				
+		$category->update($request->all());
+		CategoriesController::updatePath($category);
 
    		return redirect('categories/');
    	}
@@ -57,13 +61,23 @@ class CategoriesController extends Controller
 	    			$children->parent_id = $category->parent_id;
 	    			$children->save();
 	    		}
-	    		$category->delete();
-	    			    		
+	    		$category->delete();	    			    		
 	    	} else {
 	    		$category->delete();
 	    	}    	
 	    }
 
     	return redirect('categories/');
+    }
+
+    public function updatePath($category)
+    {
+    	$descedants = Category::descendantsAndSelf($category->id);
+
+    	foreach ($descedants as $descedant) {
+    		$slug = $descedant->parent->path;
+    		$descedant->path = $slug . '/' . $descedant->name;
+    		$descedant->save();
+    	}
     }
 }

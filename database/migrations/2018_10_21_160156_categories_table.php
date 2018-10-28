@@ -18,7 +18,7 @@ class CategoriesTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->nestedSet();
-            $table->string('slug')->nullable();
+            $table->string('path')->nullable();
             $table->timestamps();
         });
     }

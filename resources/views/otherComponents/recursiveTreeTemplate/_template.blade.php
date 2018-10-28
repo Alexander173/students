@@ -3,7 +3,9 @@
         <li>
             <div class="d-flex align-items-center">
                 <i class="fa fa-folder mr-2 focus" aria-hidden="true"></i>                
-                <a class="text-dark mr-2" href="#"> {{ $category->name }} </a>
+                <form method="get" action="{{ route('categories.show', $category->path) }}">
+                    <button type="submit" class="btn btn-sm mr-2"> {{ $category->name }} </button>
+                </form>
                 <span class="badge badge-success badge-pill mr-5"> {{ $category->children->count() }} </span>
                 
                 <div class="mr-2">

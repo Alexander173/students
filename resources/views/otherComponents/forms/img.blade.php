@@ -1,6 +1,6 @@
 <div class="img-load-form text-center">
     @if (is_null($student->image))
-        <img src="{{ asset('storage/img_lk/default_avatar.jpg') }}" class="img-responsive rounded-circle border-primary img-thumbnail img-set"/>
+        <img src="{{ asset('storage/img_lk/default_avatar.jpg') }}" class="img-responsive rounded-circle border-primary img-thumbnail img-set" alt="Avatar"/>
 
         <form method="POST" action ="{{ route('students.image.store', $student->id) }}" enctype="multipart/form-data">
             @csrf
@@ -11,7 +11,7 @@
             <button class="btn btn-success btn-sm m-1" type="submit"> Загрузить </button>
         </form>
     @else
-        <img src="{{ asset('storage/img_lk/'. $student->image->img_src) }}" class="img-responsive rounded-circle border-primary img-thumbnail img-set"/>
+        <img src="{{ asset('storage/img_lk/'. $student->image->img_src) }}" class="img-responsive rounded-circle border-primary img-thumbnail img-set" alt="Avatar"/>
         <form method="POST" action ="{{ route('students.image.update', [$student->id, $student->image->id]) }}" enctype="multipart/form-data">
             @csrf
             <div class="custom-file">

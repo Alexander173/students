@@ -10,11 +10,18 @@
         <p> Add to parrent's choosen </p>
         <div class="col-md-4 form-group">
             <select class="form-control custom-select" name="parent_id">
-                <option selected value="0" type="number">Choose category</option>
                     @foreach ($categories as $is_category)
-                        <option value="{{ $is_category->id }}" type="number">
-                            {{ $is_category->name }}
-                        </option>                       
+                        @if ($is_category->id != $category->id)
+                            @if ($is_category->id == $category->parent_id)
+                                <option value="{{ $is_category->id }}" type="number" selected>
+                                    {{ $is_category->name }}
+                                </option>
+                            @else
+                                <option value="{{ $is_category->id }}" type="number">
+                                    {{ $is_category->name }}
+                                </option>  
+                            @endif
+                        @endif                  
                     @endforeach
             </select>
         </div>
